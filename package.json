@@ -9,11 +9,11 @@
         "client": "cd src && npm start",
         "server": "nodemon backend/server.js",
         "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-        "start": "react-scripts start",
+        "start": "react-scripts start --port 3006",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "electron-dev": "concurrently \"yarn start\" \"npm run server\" \"wait-on http://localhost:3000 && electron .\"",
+        "electron-dev": "concurrently \"yarn start\" \"npm run server\" \"wait-on http://localhost:3001 && electron .\"",
         "preelectron-pack": "yarn build",
         "electron-pack": "yarn build --em.main=build/electron.js",
         "electron-build": "electron-builder -w"

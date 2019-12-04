@@ -1,26 +1,23 @@
-import { GET_BUFFER } from "../general/types";
+import { GET_BUFFER } from '../general/types';
 // import axios from "axios";
 
-var myHeaders = new Headers();
-myHeaders.append("content-type", "application/json");
+const myHeaders = new Headers();
+myHeaders.append('content-type', 'application/json');
 
-var myInit = { method: 'GET',
-               headers: myHeaders,
-               mode: 'cors',};
+const myInit = { method: 'GET', headers: myHeaders, mode: 'cors' };
 
-export const getBuffer = () => dispatch => {  
-
-  return fetch('http://localhost:3001/api/blocks', myInit)    
-    .then(resp => {      
-      return resp.json()
+export const getBuffer = () => (dispatch) => {
+  return fetch('http://localhost:3001/api/blocks', myInit)
+    .then((resp) => {
+      return resp.json();
     })
-    .then(res => {      
-      return new Promise(resolve =>
+    .then((res) => {
+      return new Promise((resolve) =>
         dispatch({
           type: GET_BUFFER,
           payload: res,
-        })
+        }),
       );
     })
-    .catch(err => console.log('err', err) );
+    .catch((err) => console.log('err', err));
 };

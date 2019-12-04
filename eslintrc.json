@@ -1,0 +1,27 @@
+{
+    "extends": [
+        "prettier",
+        "plugin:node/recommended"
+    ],
+    "parser": "babel-eslint",
+    "plugins": [
+        "prettier"
+    ],
+    "rules": {
+        "prettier/prettier": "error",
+        "no-unused-vars": "off",
+        "node/no-unsupported-features/es-syntax": "off",
+        "node/no-unpublished-require": "off",
+        "no-console": "warn",
+        "no-plusplus": "off",
+        "no-undef": "off",
+        "no-process-exit": "off",
+        "func-names": "off",
+        "object-shorthand": "off",
+        "class-methods-use-this": "off",
+        "react/jsx-filename-extension": "off"
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    }
+}

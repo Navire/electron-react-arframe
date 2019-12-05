@@ -9,6 +9,7 @@ const hid = require('hid');
 const isDev = require('electron-is-dev');
 
 let mainWindow;
+let result = [15];
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -48,44 +49,35 @@ io.on('connection', (socket) => {
 
 io.listen(3005);
 
-const data = Buffer.alloc(7);
 const devices = hid.enumerate(
   5730, // vid
   24291, // pid
 );
 
-let result = [{}, {}, {}];
-
-const updateResult = (resp, index, end) => {
-  for (let i = 0; i <= end; i++) {
-    result[index][i] = resp[index].data[i] ? resp[index].data[i] : result[index][i];
-  }
-};
-
 const readDevice = () => {
-  //Test If there is a device to connect
-  const device = devices.length === 0 ? null : hid.open_path(devices[0].path);
-
-  if (device) {
-    setInterval(() => {
-      hid.read(device, data);
-      const resp = [{ data: {} }, { data: {} }, { data: {} }];
+  //Test if there is a device to connect
+  const data = Buffer.alloc(7);
+  let device;
+  try {
+    device = hid.open_path(devices[0].path);
+    hid.read(device, data);
+    for (let i = 1; i < 7; i++) {
       switch (data[0]) {
         case 1:
-          resp[0].data = data.filter((item, index) => index !== 0);
-          updateResult(resp, 0, 5);
+          result[i - 1] = data[i] ? data[i] : result[i - 1];
           break;
         case 2:
-          resp[1].data = data.filter((item, index) => index !== 0);
-          updateResult(resp, 1, 5);
+          result[i + 5] = data[i] ? data[i] : result[i + 5];
           break;
         default:
-          resp[2].data = data.filter((item, index) => index !== 0);
-          updateResult(resp, 2, 2);
+          if (i + 11 < 15) {
+            result[i + 11] = data[i] ? data[i] : result[i + 11];
+          }
       }
-
-      //Emitting result from Panel
-      io.emit('data', JSON.stringify(result[0].concat(result[1]).concat(result[2])));
-    }, 1000);
+    }
+    io.emit('data', JSON.stringify(result));
+  } catch (err) {
+    device = null;
+    io.emit('data', 'no device founded');
   }
 };

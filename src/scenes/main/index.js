@@ -3,18 +3,11 @@ import React, { Fragment, Component } from 'react';
 import socketIOClient from 'socket.io-client';
 
 class Main extends Component {
-  audio = new Audio(soundEnviroment);
-
   state = {
     data: 'Fuck you socket IO',
   };
 
-  componentWillUnmount() {
-    this.this.audio.pause();
-  }
-
   componentDidMount() {
-    this.audio.play();
     const socket = socketIOClient('http://localhost:3005');
     socket.on('data', (data, err) => {
       this.setState({ data });

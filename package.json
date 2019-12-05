@@ -13,15 +13,9 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-<<<<<<< HEAD
-        "electron-dev": "concurrently \"yarn start\" \"npm run server\" \"wait-on http://localhost:3001 && electron .\"",
-        "preelectron-pack": "yarn build",
-        "electron-pack": "yarn build --em.main=build/electron.js",
-=======
-        "electron-dev": "concurrently \"npm run start\" \"npm run server\" \"wait-on http://localhost:3000 && electron .\"",
+        "electron-dev": "concurrently \"npm run start\" \"wait-on http://localhost:3000 && electron .\"",
         "preelectron-pack": "npm run build",
         "electron-pack": "npm run build --em.main=build/electron.js",
->>>>>>> communication between Electron and HID was made
         "electron-build": "electron-builder -w"
     },
     "dependencies": {

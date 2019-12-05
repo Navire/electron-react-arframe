@@ -3,10 +3,6 @@ import React, { Fragment, Component } from 'react';
 import socketIOClient from 'socket.io-client';
 
 class Main extends Component {
-<<<<<<< HEAD
-  render() {
-    return <div>Hello</div>;
-=======
   audio = new Audio(soundEnviroment);
 
   state = {
@@ -44,7 +40,6 @@ class Main extends Component {
         </div> */}
       </Fragment>
     );
->>>>>>> communication between Electron and HID was made
   }
 }
 

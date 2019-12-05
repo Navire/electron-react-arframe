@@ -12,14 +12,14 @@ const io = require('socket.io')();
 
 let interval;
 
-io.on("connection", socket => {
-  console.log("New client connected");
+io.on('connection', (socket) => {
+  console.log('New client connected');
   if (interval) {
     clearInterval(interval);
   }
-  interval = setInterval(() => console.log("."), 10000);
-  socket.on("disconnect", () => {
-    console.log("Client disconnected");
+  interval = setInterval(() => console.log('.'), 10000);
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
   });
 });
 
@@ -27,30 +27,28 @@ io.listen(3100);
 
 vid = 5730;
 pid = 24291;
-var device = new HID.HID(vid,pid);
+var device = new HID.HID(vid, pid);
 
 var fomatedBuffer = [];
-var bufferSize = [0,0,0];
+var bufferSize = [0, 0, 0];
 
 // Função para limpar o buffer de 15 posições. Coloca o código 255, correspondente a não haver bloco naquela posição da mesa
 clearBuffer = (buffer) => {
   buffer = [];
-  for(let i = 0; i<15; i++) {
+  for (let i = 0; i < 15; i++) {
     buffer.push(255);
   }
   return buffer;
-}
+};
 
 // Função para atualizar o buffer final de 15 posições, "fullbuffer", com base nos buffers emitidos pela mesa, "buffer"
 updateBufferSection = (fullbuffer, buffer, start, end) => {
   bufferFormated = fullbuffer;
   for (let i = start; i < end; i++) {
-    if (start == 0) bufferFormated[i] = buffer[i];
-    if (start == 6) bufferFormated[i] = buffer[i-6];
-    if (start == 12) bufferFormated[i] = buffer[i-12];
+    bufferFormated[i] = buffer[i - start];
   }
   return bufferFormated;
-}
+};
 
 // Função auxiliar para comparar vetores
 compareArray = (array1, array2) => {
@@ -59,46 +57,60 @@ compareArray = (array1, array2) => {
     equal = false;
     return equal;
   }
-  for (let i = 0 ; i < array1.length ; i++) {
+  for (let i = 0; i < array1.length; i++) {
     if (array1[i] !== array2[i]) {
       equal = false;
       break;
     }
   }
   return equal;
-}
+};
 
 // Empacota os 3 buffers em um único buffer de 15 posições. Valida se recebeu os 3 através da variável "bufferSize"
-formatBuffer =(buffer) => {
+formatBuffer = (buffer) => {
   if (!this.formatedBuffer) this.formatedBuffer = clearBuffer([]);
   if (this.formatedBuffer.length > 16) {
     this.formatedBuffer = clearBuffer([]);
   } else {
-    if (compareArray(bufferSize, [1,1,1])) {
-      console.log("bufferSize to erase: ",bufferSize)
-      bufferSize = [0,0,0];
+    if (compareArray(bufferSize, [1, 1, 1])) {
+      console.log('bufferSize to erase: ', bufferSize);
+      bufferSize = [0, 0, 0];
     }
-    if ((buffer[0] === 1)) {
+    if (buffer[0] === 1) {
       bufferSize[0] = 1;
-      this.formatedBuffer = updateBufferSection(this.formatedBuffer, Object.values(buffer).filter((item,index)=> index !== 0), 0, 5);
+      this.formatedBuffer = updateBufferSection(
+        this.formatedBuffer,
+        Object.values(buffer).filter((item, index) => index !== 0),
+        0,
+        6,
+      );
     } else if (buffer[0] === 2) {
       bufferSize[1] = 1;
-      this.formatedBuffer = updateBufferSection(this.formatedBuffer, Object.values(buffer).filter((item,index)=> index !== 0), 6, 11);
+      this.formatedBuffer = updateBufferSection(
+        this.formatedBuffer,
+        Object.values(buffer).filter((item, index) => index !== 0),
+        6,
+        12,
+      );
     } else if (buffer[0] === 3) {
       bufferSize[2] = 1;
-      this.formatedBuffer = updateBufferSection(this.formatedBuffer, Object.values(buffer).filter((item,index)=> index !== 0 && index < 4),12,14);
+      this.formatedBuffer = updateBufferSection(
+        this.formatedBuffer,
+        Object.values(buffer).filter((item, index) => index !== 0 && index < 4),
+        12,
+        15,
+      );
     }
   }
-  
-}
+};
 
-setInterval(()=>{
-    device.read((err,data)=> {
-        formatBuffer(data);
-        console.log(bufferSize);
-          if (compareArray(bufferSize, [1,1,1])) {
-            console.log("Emitindo buffer formatado: ", this.formatedBuffer);
-            io.emit("data",JSON.stringify(this.formatedBuffer));
-          }
-    })    
-},400)
+setInterval(() => {
+  device.read((err, data) => {
+    formatBuffer(data);
+    console.log(bufferSize);
+    if (compareArray(bufferSize, [1, 1, 1])) {
+      console.log('Emitindo buffer formatado: ', this.formatedBuffer);
+      io.emit('data', JSON.stringify(this.formatedBuffer));
+    }
+  });
+}, 20);

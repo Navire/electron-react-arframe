@@ -1,29 +1,15 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-// import { HashRouter as Router } from "react-router-dom";
-import { ConnectedRouter } from 'connected-react-router';
+import { Route } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 
-import Main from '../scenes/Main/';
-// import Activity from '../scenes/activity/';
-
-import history from './history';
+import Main from '../scenes/main/';
 
 const Routes = () => (
-  <ConnectedRouter history={history}>
-    <Switch>
+  <Router>
+    <div>
       <Route exact path="/" component={Main} />
-      {/* <Route path="/activity" component={Activity} /> */}
-    </Switch>
-  </ConnectedRouter>
+    </div>
+  </Router>
 );
-
-// const Routes = () => (
-//   <Router>
-//     <div>
-//       <Route exact path="/" component={Main} />
-//       <Route path="/activity" component={Activity} />
-//     </div>
-//   </Router>
-// );
 
 export default Routes;

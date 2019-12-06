@@ -1,0 +1,18 @@
+{
+    "questions": {
+        "1": "SEMPRE ENTRA EM CASA PELO BURACO DA FECHADURA.",
+        "2": "CAI DE PÉ E CORRE DEITADA.",
+        "3": "NÃO TEM OLHOS MAS PODE FICAR CEGA.",
+        "4": "TEM CINCO DEDOS, MAS NÃO TEM CARNE E OSSO.",
+        "5": "VAI E VEM, MAS NÃO SAI DO LUGAR.",
+        "6": "QUANTO MAIS SE ENXUGA, MAIS FICA MOLHADA."
+    },
+    "answers": {
+        "1": "CHAVE",
+        "2": "CHUVA",
+        "3": "FACA",
+        "4": "LUVA",
+        "5": "PORTA",
+        "6": "TOALHA"
+    }
+}

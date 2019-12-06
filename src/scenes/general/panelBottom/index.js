@@ -1,25 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Block from '../block';
-import socketIOClient from 'socket.io-client';
 
 class PanelBottom extends Component {
-  constructor() {
-    super();
-    this.state = {
-      response: false,
-      endpoint: 'http://127.0.0.1:3100',
-    };
-  }
-
-  componentDidMount() {
-    const { endpoint } = this.state;
-    const socket = socketIOClient(endpoint);
-    socket.on('data', (data) => {
-      console.log('Dados recebidos: ', data);
-      this.setState({ response: data.toString() });
-    });
-  }
-
   render() {
     const style = {
       panel: {
@@ -41,15 +23,13 @@ class PanelBottom extends Component {
       },
     };
 
-    const { response } = this.state;
-    const jsonResponse = response ? JSON.parse(response) : new Array(15).fill(255);
-    console.log(jsonResponse);
+    const { response } = this.props;
 
     return (
       <div style={style.panel}>
         <div style={style.display}>
-          {jsonResponse.map((item, index) => (
-            <Block key={index} name={item}></Block>
+          {response.map((item, index) => (
+            <Block key={index} simbol={item}></Block>
           ))}
         </div>
       </div>

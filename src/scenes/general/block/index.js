@@ -1,12 +1,10 @@
-import React, { Component, Fragment } from 'react';
-import BlockTranslation from '../block_translation.json';
+import React from 'react';
 // import assetBlock from '../../assets/edupanel-assets/white_square.png';
 
 const Block = (props) => {
-  let blockTranslantion = BlockTranslation.purple_blocks;
   return (
     <div>
-      <div style={style.background}>{blockTranslantion[props.name]}</div>
+      <div style={style.background}>{props.simbol}</div>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import socketIOClient from 'socket.io-client';
 
 class Main extends Component {
   state = {
-    data: 'Fuck you socket IO',
+    data: 'Receiver a message from socket IO',
   };
 
   componentDidMount() {

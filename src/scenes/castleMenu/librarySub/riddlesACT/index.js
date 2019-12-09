@@ -52,6 +52,11 @@ class RiddlesACT extends Component {
         errors.push({ wrongValue: arrTryWord[i], wrongPosition: i });
       }
     }
+    if (arrTryWord > arrRightWord) {
+      for (let i = arrRightWord.length; i < arrTryWord.length; i++) {
+        errors.push({ wrongValue: arrTryWord[i], wrongPosition: i });
+      }
+    }
     return errors;
   };
 
@@ -62,11 +67,9 @@ class RiddlesACT extends Component {
     const tamTryAnswer = tryAnswer.length;
     const tamRightAnswer = rightAnswer.length;
     console.log('TryAnswer: ', tryAnswer);
-    if (tamTryAnswer > tamRightAnswer) {
-      this.checkWrongAnswer = true;
-    } else if (tamTryAnswer < tamRightAnswer) {
+    if (tamTryAnswer < tamRightAnswer) {
       this.checkWrongAnswer = false;
-    } else if (tamTryAnswer === tamRightAnswer) {
+    } else if (tamTryAnswer >= tamRightAnswer) {
       if (tryAnswer === rightAnswer) {
         right = true;
         this.checkWrongAnswer = false;
@@ -84,7 +87,7 @@ class RiddlesACT extends Component {
   };
 
   showCongratulations = (rightAnswer) => {
-    if (rightAnswer) return <div>PARABÉNS! VOCÊ ACERTOU!</div>;
+    if (rightAnswer) return <div>PARABÉNS! VOCÊ ACERTOU! REMOVA OS BLOCOS DA MESA PARA A PRÓXIMA FASE!</div>;
     if (this.checkWrongAnswer)
       return <div>RESPOSTA ERRADA! CORRIJA OS ERROS: {this.state.errors.map((item) => item.wrongValue)}</div>;
   };
@@ -119,7 +122,7 @@ class RiddlesACT extends Component {
     console.log('Question: ', question);
     return (
       <div>
-        {this.showCongratulations(this.isAnswer)}
+        {this.showCongratulations(isAnswer)}
         <Background
           isPanelClean={this.isCleaningPanel > 0}
           showAnswer={this.isAnswer}

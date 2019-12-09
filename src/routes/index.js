@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import { HashRouter as Router } from 'react-router-dom';
 
 import RiddlesACT from '../scenes/castleMenu/librarySub/riddlesACT';
-import Main from '../scenes/Main/index';
+import Main from '../scenes/main/index';
 
 const Routes = () => (
   <Router>

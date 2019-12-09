@@ -3,10 +3,10 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import thunk from 'redux-thunk';
 
 import history from '../routes/history';
-// import activityReducer from '../scenes/activity/reducer';
+import panelReducer from '../scenes/main/reducer';
 
 const rootReducer = combineReducers({
-  // activity: activityReducer,
+  panelBlocks: panelReducer,
 });
 
 const middlewares = [routerMiddleware(history), thunk];

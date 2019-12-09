@@ -5,7 +5,12 @@ import './background.css';
 const Background = (props) => {
   return (
     <div className="background">
-      <Book question={props.question} answer={props.answer} showAnswer={props.showAnswer}></Book>
+      <Book
+        isPanelClean={props.isPanelClean}
+        question={props.question}
+        answer={props.answer}
+        showAnswer={props.showAnswer}
+      ></Book>
     </div>
   );
 };

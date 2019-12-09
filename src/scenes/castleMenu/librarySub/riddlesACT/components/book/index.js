@@ -5,7 +5,7 @@ import './book.css';
 const Book = (props) => {
   const setor = (
     <div className="right">
-      <Page text={props.answer} showAnswer={props.showAnswer}></Page>
+      <Page text={props.answer} isPanelClean={props.isPanelClean} showAnswer={props.showAnswer}></Page>
     </div>
   );
   return (

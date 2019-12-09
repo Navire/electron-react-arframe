@@ -1,0 +1,9 @@
+.page {
+    background-color: #FFFFFF;
+    width: 90%;
+    height: 100%;
+    border: 1px solid #000000;
+    position: relative;
+    margin-left: 0px;
+    color: #000000;
+  }

@@ -2,12 +2,14 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { HashRouter as Router } from 'react-router-dom';
 
-import UpperBar from '../scenes/general/upperBar/example';
+import RiddlesACT from '../scenes/castleMenu/librarySub/riddlesACT';
+import Main from '../scenes/main/index';
 
 const Routes = () => (
   <Router>
     <div>
-      <Route exact path="/" component={UpperBar} />
+      <Route exact path="/" component={RiddlesACT} />
+      <Route exact path="/mesa" component={Main} />
     </div>
   </Router>
 );

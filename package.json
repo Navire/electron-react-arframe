@@ -1,91 +1,92 @@
 {
-    "name": "edupanel",
-    "version": "0.0.1",
-    "private": true,
-    "main": "public/electron.js",
-    "author": "CITS Devs",
-    "homepage": ".",
-    "scripts": {
-        "client": "cd src && npm start",
-        "server": "nodemon backend/server.js",
-        "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-        "start": "react-scripts start --port 3006",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject",
-        "electron-dev": "concurrently \"npm run start\" \"wait-on http://localhost:3000 && electron .\"",
-        "preelectron-pack": "npm run build",
-        "electron-pack": "npm run build --em.main=build/electron.js",
-        "electron-build": "electron-builder -w"
-    },
-    "dependencies": {
-        "connected-react-router": "^4.4.1",
-        "cors": "^2.8.5",
-        "electron-is-dev": "^1.1.0",
-        "eventemitter3": "^4.0.0",
-        "express": "^4.16.2",
-        "hid": "^1.0.1",
-        "history": "^4.7.2",
-        "node-gyp": "^6.0.1",
-        "prebuild-install": "^5.3.3",
-        "react": "^16.12.0",
-        "react-animation": "^1.2.2",
-        "react-animations": "^1.0.0",
-        "react-dom": "^16.12.0",
-        "react-is": "^16.12.0",
-        "react-motion": "^0.5.2",
-        "react-motion-loop": "^2.0.2",
-        "react-redux": "^5.0.7",
-        "react-router-dom": "^4.3.1",
-        "react-scripts": "1.1.5",
-        "react-socket-io": "^0.2.5",
-        "rebuild": "^0.1.2",
-        "redux": "^4.0.0",
-        "redux-thunk": "^2.3.0",
-        "socket.io": "^1.7.0",
-        "styled-components": "^5.0.0-rc.2"
-    },
-    "devDependencies": {
-        "babel-eslint": "^10.0.3",
-        "concurrently": "^3.5.0",
-        "electron": "^7.1.2",
-        "electron-builder": "^21.2.0",
-        "eslint": "5.0.0",
-        "eslint-config-airbnb": "18.0.1",
-        "eslint-config-node": "^4.0.0",
-        "eslint-config-prettier": "^6.7.0",
-        "eslint-plugin-import": "2.18.2",
-        "eslint-plugin-jsx-a11y": "6.2.3",
-        "eslint-plugin-node": "^10.0.0",
-        "eslint-plugin-prettier": "^3.1.1",
-        "eslint-plugin-react": "^7.17.0",
-        "eslint-plugin-react-hooks": "1.7.0",
-        "prettier": "^1.19.1",
-        "wait-on": "^3.3.0"
-    },
-    "eslintConfig": {
-        "extends": "react-app"
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
-    "build": {
-        "appId": "com.example.electron-cra",
-        "files": [
-            "build/**/*",
-            "node_modules/**/*"
-        ],
-        "directories": {
-            "buildResources": "assets"
-        }
+  "name": "edupanel",
+  "version": "0.0.1",
+  "private": true,
+  "main": "public/electron.js",
+  "author": "CITS Devs",
+  "homepage": ".",
+  "scripts": {
+    "client": "cd src && npm start",
+    "server": "nodemon backend/server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "electron-dev": "concurrently \"npm run start\" \"wait-on http://localhost:3000 && electron .\"",
+    "preelectron-pack": "npm run build",
+    "electron-pack": "npm run build --em.main=build/electron.js",
+    "electron-build": "electron-builder -w"
+  },
+  "dependencies": {
+    "connected-react-router": "^4.4.1",
+    "cors": "^2.8.5",
+    "electron-is-dev": "^1.1.0",
+    "eventemitter3": "^4.0.0",
+    "express": "^4.16.2",
+    "hid": "^1.0.1",
+    "history": "^4.7.2",
+    "node-gyp": "^6.0.1",
+    "prebuild-install": "^5.3.3",
+    "react": "^16.12.0",
+    "react-animation": "^1.2.2",
+    "react-animations": "^1.0.0",
+    "react-dom": "^16.12.0",
+    "react-is": "^16.12.0",
+    "react-motion": "^0.5.2",
+    "react-motion-loop": "^2.0.2",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.5",
+    "react-socket-io": "^0.2.5",
+    "rebuild": "^0.1.2",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "socket.io": "^1.7.0",
+    "socket.io-client": "^2.3.0",
+    "styled-components": "^5.0.0-rc.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "concurrently": "^3.5.0",
+    "electron": "^7.1.2",
+    "electron-builder": "^21.2.0",
+    "eslint": "5.0.0",
+    "eslint-config-airbnb": "18.0.1",
+    "eslint-config-node": "^4.0.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "1.7.0",
+    "prettier": "^1.19.1",
+    "wait-on": "^3.3.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "build": {
+    "appId": "com.example.electron-cra",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
     }
+  }
 }

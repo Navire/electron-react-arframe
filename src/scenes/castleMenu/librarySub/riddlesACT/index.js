@@ -11,7 +11,7 @@ class RiddlesACT extends Component {
     answer: '1',
     panel: '',
     response: new Array(15).fill(''),
-    endpoint: 'http://10.10.0.171:3005',
+    endpoint: 'localhost:3005',
     answerBuffer: '',
     errors: [],
   };

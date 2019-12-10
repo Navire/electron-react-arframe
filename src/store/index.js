@@ -3,7 +3,7 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import thunk from 'redux-thunk';
 
 import history from '../routes/history';
-import panelReducer from '../scenes/main/reducer';
+import panelReducer from '../scenes/main/redux';
 
 const rootReducer = combineReducers({
   panelBlocks: panelReducer,

@@ -1,39 +1,24 @@
-import React, { Fragment, Component } from 'react';
-
-import socketIOClient from 'socket.io-client';
+import React, { Component } from 'react';
+import { UpperBar, Enviroment, Levels } from './components';
+import { connect } from 'react-redux';
+import { initiateSocket } from './redux';
 
 class Main extends Component {
-  state = {
-    data: 'Receiver a message from socket IO',
-  };
-
-  componentDidMount() {
-    const socket = socketIOClient('http://localhost:3005');
-    socket.on('data', (data, err) => {
-      this.setState({ data });
-    });
-  }
-
   render() {
+    console.log(this.props.buffer);
     return (
-      <Fragment>
-        <p>Here a sample</p>
-        {this.state.data}
-        {/* <div style={style.background}>
-          <UpperBar>
-            <InfoBt top="10%" right="2%" />
-          </UpperBar>
-          <StarBg />
-          <PlaneObj />
-          <BallonObj />
-          <BottomDesert />
-          <PyramidObj />
-          <ThreepyramidObj />
-          <SphinxObj />
-        </div> */}
-      </Fragment>
+      <Enviroment>
+        <UpperBar />
+        <Levels />
+      </Enviroment>
     );
   }
 }
 
-export default Main;
+const mapStateToProps = (state) => {
+  return {
+    ...state.panelBlocks,
+  };
+};
+
+export default connect(mapStateToProps, initiateSocket)(Main);

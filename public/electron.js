@@ -1,6 +1,4 @@
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
+const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path');
 //Requires to HID
 const io = require('socket.io')();
@@ -15,9 +13,13 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800, // width: 1920,
     height: 600, // height: 1800,
+    // frame: false, //Generate Window Frame
   });
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
   mainWindow.on('closed', () => (mainWindow = null));
+
+  // const menu = Menu.buildFromTemplate([{}]);
+  // Menu.setApplicationMenu(menu);
 }
 
 app.on('ready', createWindow);

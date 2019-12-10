@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { UpperBar, Enviroment } from './components';
+import { UpperBar, Enviroment, Levels } from './components';
 
 class Main extends Component {
   render() {
     return (
       <Enviroment>
         <UpperBar />
+        <Levels />
       </Enviroment>
     );
   }

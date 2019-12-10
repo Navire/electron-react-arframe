@@ -1,4 +1,5 @@
 import UpperBar from './upperBar';
 import Enviroment from './enviroment';
+import Levels from './levels';
 
-export { UpperBar, Enviroment };
+export { UpperBar, Enviroment, Levels };

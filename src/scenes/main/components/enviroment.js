@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { mainBackground } from '../../assets';
 
@@ -12,6 +12,7 @@ const Enviroment = (props) => {
     background-image: url('${mainBackground}');
     background-repeat: no-repeat;    
     background-size: 100% 100%;
+    overflow: hidden;
   `;
 
   return <Background>{props.children}</Background>;

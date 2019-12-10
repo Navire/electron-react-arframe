@@ -1,19 +1,15 @@
-import socketIOClient from 'socket.io-client';
+function init() {
+  return { count: [] };
+}
 
-const socket = socketIOClient('http://localhost:3005');
-
-const initialState = {
-  buffer: [],
-};
-
-const panelReducer = (state = initialState, action) => {
+function panelReducer(state, action) {
   switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'decrement':
+      return { count: state.count - 1 };
     default:
-      socket.on('data', (data, err) => {
-        state = data;
-      });
-      return state;
+      return init();
   }
-};
-
+}
 export default panelReducer;

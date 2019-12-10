@@ -15,7 +15,6 @@ const ButtonBar = (props) => {
   }, [visibility]);
 
   const CircleBt = styled.div`
-    background-color: #bbb;
     top: 5px;
     width: 35px;
     height: 35px;
@@ -34,7 +33,7 @@ const ButtonBar = (props) => {
   `;
 
   const Img = styled.img`
-    width: 80%;
+    width: 100%;
     margin: 10% auto;
     display: block;
   `;

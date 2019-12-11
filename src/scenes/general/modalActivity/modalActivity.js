@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const ModalActivity = (props) => {
   return (
     <Div hidden={props.hidden ? '' : 'none'}>
-      <P>Parabéns Amiginho, Você Acertou</P>
+      <P>Parabéns Amiguinho, Você Acertou</P>
       <P>Por favor, limpe o painel para irmos a próxima atividade.</P>
     </Div>
   );

@@ -8,10 +8,13 @@ const ButtonBar = (props) => {
   const [visibility, changeVisibility] = useState('hidden');
 
   useEffect(() => {
+    const sound = new Audio(audio);
     if (audio && visibility === 'visible') {
-      const sound = new Audio(audio);
       sound.play();
     }
+    return () => {
+      sound.pause();
+    };
   }, [visibility]);
 
   const CircleBt = styled.div`
@@ -23,7 +26,8 @@ const ButtonBar = (props) => {
     float: ${position ? position : 'left'};
     ${position ? position : 'left'}: ${distance ? distance : 10}px;
     :hover {
-      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.24), 0 7px 5px 0 rgba(0, 0, 0, 0.19);
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.24),
+        0 7px 5px 0 rgba(0, 0, 0, 0.19);
       transform: scale(1.1);
     }
     :active {

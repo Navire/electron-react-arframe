@@ -27,7 +27,7 @@ export const initiateSocket = (dispatch) => {
     return new Promise((resolve) =>
       dispatch({
         type: GET_BUFFER,
-        payload: data,
+        payload: JSON.parse(data),
       }),
     );
   });

@@ -4,7 +4,7 @@
     "useTabs":false,
     "semicolons": true,
     "quoteProps": "as-needed",    
-    "printWidth": 120,
+    "printWidth": 70,
     "bracketSpacing": true,
     "arrowParens":"always",
     "trailingComma":"all",

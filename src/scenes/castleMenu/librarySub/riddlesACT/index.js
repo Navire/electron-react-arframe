@@ -1,138 +1,56 @@
-import React, { Fragment, Component } from 'react';
-import PanelBottom from '../../../general/panelBottom';
+import React, { useState, useEffect } from 'react';
 import Background from './components/background';
-import activity from './questions.json';
-import socketIOClient from 'socket.io-client';
-import BlockTranslation from '../../../general/block_translation.json';
+import questions from './questions.json';
+import BlockTranslation from '../../../general/blockTranslation.json';
+import { connect } from 'react-redux';
 
-class RiddlesACT extends Component {
-  state = {
-    question: '1',
-    answer: '1',
-    panel: '',
-    response: new Array(15).fill(''),
-    endpoint: 'localhost:3005',
-    answerBuffer: '',
-    errors: [],
-  };
+const RiddlesACT = (props) => {
+  const [words, setWord] = useState(questions.answers[1]);
 
-  fromBitToChar = (response) => response.map((item) => BlockTranslation.red_blocks[item]);
+  const [index, setIndex] = useState(1);
 
-  componentDidMount() {
-    const { endpoint } = this.state;
-    const socket = socketIOClient(endpoint);
-    socket.on('data', (data) => {
-      // console.log('Dados recebidos: ', data);
-      // const data = '[121, 141, 124, 226, 118, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255]';
-      const tableSymbolNumbers = JSON.parse(data);
-      const tableSymbols = this.fromBitToChar(tableSymbolNumbers);
-      this.setState({ response: tableSymbols });
-    });
-  }
+  const [showAnswer, setShowAnswer] = useState(false);
 
-  fromArrayToString = (array) => {
-    let stringRet = '';
-    array.map((item) => {
-      stringRet += item ? item : ' ';
-    });
-    return stringRet.trim();
-  };
+  const [clean, setClean] = useState(false);
 
-  checkWrongAnswer = false;
-  isCleaningPanel = 0;
+  const { buffer } = props;
 
-  findError = (tryWord, rightWord) => {
-    const arrTryWord = tryWord.split('');
-    const arrRightWord = rightWord.split('');
+  useEffect(() => {
+    const blocks = buffer
+      .filter((item) => item !== 255)
+      .map((item) => BlockTranslation.red_blocks[item]);
+    const panel = blocks.join('');
 
-    let errors = [];
-
-    for (let i = 0; i < arrRightWord.length; i++) {
-      if (arrTryWord[i] !== arrRightWord[i]) {
-        errors.push({ wrongValue: arrTryWord[i], wrongPosition: i });
+    if (!showAnswer) {
+      if (words === panel) {
+        setShowAnswer(true);
       }
-    }
-    if (arrTryWord > arrRightWord) {
-      for (let i = arrRightWord.length; i < arrTryWord.length; i++) {
-        errors.push({ wrongValue: arrTryWord[i], wrongPosition: i });
-      }
-    }
-    return errors;
-  };
-
-  previousPanelWord = '';
-
-  checkAnswer = (tryAnswer, rightAnswer) => {
-    let right = false;
-    const tamTryAnswer = tryAnswer.length;
-    const tamRightAnswer = rightAnswer.length;
-    console.log('TryAnswer: ', tryAnswer);
-    if (tamTryAnswer < tamRightAnswer) {
-      this.checkWrongAnswer = false;
-    } else if (tamTryAnswer >= tamRightAnswer) {
-      if (tryAnswer === rightAnswer) {
-        right = true;
-        this.checkWrongAnswer = false;
-      } else {
-        if (this.previousPanelWord != tryAnswer) {
-          this.previousPanelWord = tryAnswer;
-          const errorsFound = this.findError(this.previousPanelWord, rightAnswer);
-          console.log('Erros: ', errorsFound);
-          this.setState({ errors: errorsFound });
+    } else {
+      if (blocks.length === 0) {
+        setClean(false);
+        setShowAnswer(false);
+        if (index < questions.length) {
+          setWord(questions.answers[index + 1]);
+          setIndex(index + 1);
         }
-        this.checkWrongAnswer = true;
       }
     }
-    return right;
+  }, [buffer]);
+
+  return (
+    <Background
+      isPanelClean={clean}
+      showAnswer={showAnswer}
+      question={questions.questions[index]}
+      answer={questions.answers[index]}
+    ></Background>
+  );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    ...state.panelBlocks,
   };
+};
 
-  showCongratulations = (rightAnswer) => {
-    if (rightAnswer) return <div>PARABÉNS! VOCÊ ACERTOU! REMOVA OS BLOCOS DA MESA PARA A PRÓXIMA FASE!</div>;
-    if (this.checkWrongAnswer)
-      return <div>RESPOSTA ERRADA! CORRIJA OS ERROS: {this.state.errors.map((item) => item.wrongValue)}</div>;
-  };
-
-  render() {
-    const stringAnswer = this.fromArrayToString(this.state.response) ? this.fromArrayToString(this.state.response) : '';
-    //const isAnswer = false;
-    const isAnswer = this.checkAnswer(stringAnswer, activity.answers[this.state.answer]);
-    console.log('CleaningPanel: ', this.isCleaningPanel);
-    console.log('isAnswer: ', isAnswer);
-
-    let question = parseInt(this.state.question);
-    let answer = parseInt(this.state.answer);
-
-    if (isAnswer) {
-      this.isCleaningPanel = 1;
-    }
-    if (this.isCleaningPanel === 1 && (!stringAnswer || stringAnswer.length === 0)) {
-      this.isCleaningPanel = 2;
-    }
-
-    if (this.isCleaningPanel === 2) {
-      question++;
-      answer++;
-      const arrQuestions = Object.keys(activity.questions);
-      console.log('Vetor de questões: ', arrQuestions);
-      const tamActivities = arrQuestions.length;
-      console.log('Total de atividades: ', tamActivities);
-      this.isCleaningPanel = 0;
-      if (question <= tamActivities) this.setState({ question: question, answer: answer });
-    }
-    console.log('Question: ', question);
-    return (
-      <div>
-        {this.showCongratulations(isAnswer)}
-        <Background
-          isPanelClean={this.isCleaningPanel > 0}
-          showAnswer={this.isAnswer}
-          question={activity.questions[this.state.question]}
-          answer={this.state.answerBuffer.length > 0 ? this.state.answerBuffer : activity.answers[this.state.answer]}
-        ></Background>
-        <PanelBottom response={this.state.response}></PanelBottom>
-      </div>
-    );
-  }
-}
-
-export default RiddlesACT;
+export default connect(mapStateToProps, null)(RiddlesACT);

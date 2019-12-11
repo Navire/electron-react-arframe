@@ -2,6 +2,7 @@ import React from 'react';
 import Book from '../book';
 import './background.css';
 import UpperBar from '../upperBar';
+import DigitalPanel from '../../../../../general/digitalPanel';
 
 const Background = (props) => {
   return (
@@ -13,6 +14,7 @@ const Background = (props) => {
         answer={props.answer}
         showAnswer={props.showAnswer}
       ></Book>
+      <DigitalPanel />
     </div>
   );
 };

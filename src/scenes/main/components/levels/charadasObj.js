@@ -5,22 +5,16 @@ import styled from 'styled-components';
 
 const CharadasObj = (props) => {
   return (
-    <Div>
-      <Link to="/riddles">
-        <Img alt="charadas" src={charadas} />
-      </Link>
-    </Div>
+    <Link to="/riddles">
+      <Img alt="charadas" src={charadas} />
+    </Link>
   );
 };
 
-const Div = styled.div`
-  top: 15%;
-  left: 5%;
-  position: absolute;
-`;
-
 const Img = styled.img`
-  width: 80%;
+  width: 35%;
+  float: left;
+  margin-left: 10%;
 `;
 
 export default CharadasObj;

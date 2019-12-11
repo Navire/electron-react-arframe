@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 const RiddlesACT = (props) => {
-  const [words, setWord] = useState(questions.answers[6]);
+  const [words, setWord] = useState(questions.answers[1]);
 
-  const [index, setIndex] = useState(6);
+  const [index, setIndex] = useState(1);
 
   const [showAnswer, setShowAnswer] = useState(false);
 

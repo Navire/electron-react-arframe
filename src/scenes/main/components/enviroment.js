@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { mainBackground } from '../../assets';
+import Audio from './audio';
 
 const Enviroment = (props) => {
   const Background = styled.div`
@@ -15,7 +16,12 @@ const Enviroment = (props) => {
     overflow: hidden;
   `;
 
-  return <Background>{props.children}</Background>;
+  return (
+    <Background>
+      <Audio />
+      {props.children}
+    </Background>
+  );
 };
 
 export default Enviroment;

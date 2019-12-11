@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { DecifrandoObj, CharadasObj } from './levels/';
 import styled from 'styled-components';
 

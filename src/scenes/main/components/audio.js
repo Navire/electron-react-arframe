@@ -7,6 +7,7 @@ const Enviroment = (props) => {
   useEffect(() => {
     //Mounted
     audio.play();
+    audio.loop = true;
 
     //Unmount
     return () => {

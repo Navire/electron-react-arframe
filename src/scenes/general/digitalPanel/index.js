@@ -27,7 +27,7 @@ const DigitalPanel = (props) => {
 };
 
 const BoxBottom = styled.div`
-  top: ${window.innerHeight - 165}px;
+  bottom: 0;
   left: 25%;
   position: absolute;
   background-position: top center;

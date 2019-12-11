@@ -15,7 +15,11 @@ function createWindow() {
     height: 600, // height: 1800,
     // frame: false, //Generate Window Frame
   });
-  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
+  mainWindow.loadURL(
+    isDev
+      ? 'http://localhost:3000'
+      : `file://${path.join(__dirname, '../build/index.html')}`,
+  );
   mainWindow.on('closed', () => (mainWindow = null));
 
   // const menu = Menu.buildFromTemplate([{}]);
@@ -80,6 +84,6 @@ const readDevice = () => {
     io.emit('data', JSON.stringify(result));
   } catch (err) {
     device = null;
-    io.emit('data', 'no device founded');
+    io.emit('data', null);
   }
 };

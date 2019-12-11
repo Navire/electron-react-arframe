@@ -24,11 +24,11 @@ export default panelReducer;
 
 export const initiateSocket = (dispatch) => {
   socket.on('data', (data, err) => {
-    return new Promise((resolve) =>
+    return new Promise((resolve) => {
       dispatch({
         type: GET_BUFFER,
-        payload: JSON.parse(data),
-      }),
-    );
+        payload: JSON.parse(data ? data : '[]'),
+      });
+    });
   });
 };

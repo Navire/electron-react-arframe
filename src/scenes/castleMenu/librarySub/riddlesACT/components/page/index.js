@@ -17,8 +17,7 @@ const Page = (props) => {
   const answer = getAnswerImage(props.text.toLowerCase());
   let whatToShow = null;
   let question = null;
-  console.log('props.showAnswer: ', props.showAnswer);
-  console.log('props.title: ', props.title);
+
   if (props.showAnswer && !props.title) {
     whatToShow = (
       <div className="imageContainer">
@@ -50,7 +49,7 @@ const Page = (props) => {
 
 const getAnswerImage = (imageName) => {
   let answerImage = null;
-  console.log('imageName: ', imageName);
+
   if (imageName) {
     switch (imageName) {
       case 'chave':

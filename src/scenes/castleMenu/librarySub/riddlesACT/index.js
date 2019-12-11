@@ -3,6 +3,7 @@ import Background from './components/background';
 import questions from './questions.json';
 import BlockTranslation from '../../../general/blockTranslation.json';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const RiddlesACT = (props) => {
   const [words, setWord] = useState(questions.answers[1]);
@@ -14,6 +15,8 @@ const RiddlesACT = (props) => {
   const [clean, setClean] = useState(false);
 
   const { buffer } = props;
+
+  const [isFinished, setFinished] = useState(false);
 
   useEffect(() => {
     const blocks = buffer
@@ -32,10 +35,22 @@ const RiddlesACT = (props) => {
         if (index < questions.length) {
           setWord(questions.answers[index + 1]);
           setIndex(index + 1);
+        } else {
+          setFinished(true);
         }
       }
     }
   }, [buffer]);
+
+  if (isFinished) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/',
+        }}
+      />
+    );
+  }
 
   return (
     <Background

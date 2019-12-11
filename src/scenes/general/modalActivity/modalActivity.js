@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { mario1 } from '../../assets/';
 
 const ModalActivity = (props) => {
+  const audio = new Audio(mario1);
+
+  useEffect(() => {
+    console.log(props.hidden);
+    //Mounted
+    if (props.hidden) {
+      audio.play();
+    }
+
+    //Unmount
+    return () => {
+      audio.pause();
+    };
+  }, [props.hidden]);
+
   return (
     <Div hidden={props.hidden ? '' : 'none'}>
       <P>Parabéns Amiguinho, Você Acertou</P>

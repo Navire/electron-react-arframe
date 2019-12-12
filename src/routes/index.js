@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Route } from 'react-router-dom';
 import { HashRouter as Router } from 'react-router-dom';
 
-import RiddlesACT from '../scenes/castleMenu/librarySub/riddlesACT';
+import RiddlesACT from '../scenes/riddlesACT';
 import Main from '../scenes/main/';
 
 const Routes = () => (

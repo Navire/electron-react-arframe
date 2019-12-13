@@ -47,7 +47,7 @@ const Page = (props) => {
 
 const TitleFontLeft = styled.h1`
   color: #830106;
-  font-size: 90px;
+  font-size: 400%;
   font-family: 'Sail', cursive;
   line-height: 20px;
   text-align: left;
@@ -56,7 +56,7 @@ const TitleFontLeft = styled.h1`
 
 const TitleFontRight = styled.h1`
   color: #830106;
-  font-size: 90px;
+  font-size: 400%;
   font-family: 'Sail', cursive;
   line-height: 20px;
   text-align: right;

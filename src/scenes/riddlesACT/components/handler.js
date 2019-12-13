@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Background from './components/background';
+import React, { Fragment, useState, useEffect } from 'react';
 import questions from './questions.json';
-import BlockTranslation from '../../../general/blockTranslation.json';
+import Book from './book/';
+import { ModalActivity } from '../../general/modalActivity/';
+import BlockTranslation from '../../general/blockTranslation.json';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -53,12 +54,15 @@ const RiddlesACT = (props) => {
   }
 
   return (
-    <Background
-      isPanelClean={clean}
-      showAnswer={showAnswer}
-      question={questions.questions[index]}
-      answer={questions.answers[index]}
-    ></Background>
+    <Fragment>
+      <Book
+        isPanelClean={clean}
+        question={questions.questions[index]}
+        answer={questions.answers[index]}
+        showAnswer={showAnswer}
+      />
+      <ModalActivity hidden={showAnswer} />
+    </Fragment>
   );
 };
 

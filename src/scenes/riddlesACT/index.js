@@ -1,9 +1,9 @@
 import React from 'react';
-import Book from '../book';
-import UpperBar from '../upperBar';
-import DigitalPanel from '../../../../../general/digitalPanel';
-import { ModalActivity } from '../../../../../general/modalActivity';
-import { livroAberto } from '../../../../../assets';
+import Handler from './components/handler';
+import UpperBar from './components/upperBar';
+import DigitalPanel from '../general/digitalPanel';
+import { ModalActivity } from '../general/modalActivity';
+import { livroAberto } from '../assets';
 import styled from 'styled-components';
 
 const Background = (props) => {
@@ -11,12 +11,7 @@ const Background = (props) => {
     <BG>
       <UpperBar />
       <ModalActivity hidden={props.showAnswer} />
-      <Book
-        isPanelClean={props.isPanelClean}
-        question={props.question}
-        answer={props.answer}
-        showAnswer={props.showAnswer}
-      ></Book>
+      <Handler />
       <DigitalPanel />
     </BG>
   );

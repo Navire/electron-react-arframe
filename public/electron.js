@@ -2,6 +2,7 @@ const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path');
 //Requires to HID
 const io = require('socket.io')();
+const io2 = require('socket.io')();
 const hid = require('hid');
 
 const isDev = require('electron-is-dev');
@@ -34,6 +35,10 @@ app.on('window-all-closed', () => {
   }
 });
 
+app.on('closed', () => {
+  app = null;
+});
+
 app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
@@ -50,6 +55,9 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     clearInterval(interval);
     console.log('Client disconnected');
+  });
+  socket.on('evento', (msg) => {
+    app.quit();
   });
 });
 

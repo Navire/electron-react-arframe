@@ -22,6 +22,11 @@ const panelReducer = (state, action) => {
 
 export default panelReducer;
 
+export const closeApp = () => {
+  socket.emit('evento', 'bla');
+  console.log('close');
+};
+
 export const initiateSocket = (dispatch) => {
   socket.on('data', (data, err) => {
     return new Promise((resolve) => {

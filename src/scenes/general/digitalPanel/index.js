@@ -7,7 +7,7 @@ import { initiateSocket } from '../../../store/redux';
 import vetor from '../blockTranslation.json';
 
 const DigitalPanel = (props) => {
-  const { buffer } = props;
+  const { buffer } = props.buffer;
 
   return (
     <BoxBottom>
@@ -37,10 +37,8 @@ const BoxBottom = styled.div`
   height: 150px;
 `;
 
-const mapStateToProps = (state) => {
-  return {
-    ...state.panelBlocks,
-  };
-};
+const mapStateToProps = (state) => ({
+  buffer: state.panelBlocks,
+});
 
 export default connect(mapStateToProps, initiateSocket)(DigitalPanel);

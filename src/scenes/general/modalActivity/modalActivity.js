@@ -6,7 +6,6 @@ const ModalActivity = (props) => {
   const audio = new Audio(mario1);
 
   useEffect(() => {
-    console.log(props.hidden);
     //Mounted
     if (props.hidden) {
       audio.play();

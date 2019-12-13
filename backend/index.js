@@ -14,6 +14,7 @@ let interval;
 
 io.on('connection', (socket) => {
   console.log('New client connected');
+  3;
   if (interval) {
     clearInterval(interval);
   }
@@ -96,7 +97,9 @@ formatBuffer = (buffer) => {
       bufferSize[2] = 1;
       this.formatedBuffer = updateBufferSection(
         this.formatedBuffer,
-        Object.values(buffer).filter((item, index) => index !== 0 && index < 4),
+        Object.values(buffer).filter(
+          (item, index) => index !== 0 && index < 4,
+        ),
         12,
         15,
       );
@@ -104,13 +107,22 @@ formatBuffer = (buffer) => {
   }
 };
 
+prevBuffer = [];
+
 setInterval(() => {
   device.read((err, data) => {
     formatBuffer(data);
     console.log(bufferSize);
+    console.log('Buffer anterior: ', prevBuffer);
     if (compareArray(bufferSize, [1, 1, 1])) {
-      console.log('Emitindo buffer formatado: ', this.formatedBuffer);
-      io.emit('data', JSON.stringify(this.formatedBuffer));
+      if (prevBuffer.toString() !== this.formatedBuffer.toString()) {
+        console.log(
+          'Emitindo buffer formatado: ',
+          this.formatedBuffer,
+        );
+        io.emit('data', JSON.stringify(this.formatedBuffer));
+        prevBuffer = [...this.formatedBuffer];
+      }
     }
   });
-}, 20);
+}, 10);

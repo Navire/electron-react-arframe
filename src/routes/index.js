@@ -4,12 +4,14 @@ import { HashRouter as Router } from 'react-router-dom';
 
 import RiddlesACT from '../scenes/riddlesACT';
 import Main from '../scenes/main/';
+import Ar from '../scenes/ar/';
 
 const Routes = () => (
   <Router>
     <Fragment>
       <Route exact path="/" component={Main} />
       <Route exact path="/riddles" component={RiddlesACT} />
+      <Route exact path="/ar" component={Ar} />
     </Fragment>
   </Router>
 );

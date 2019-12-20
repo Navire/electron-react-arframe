@@ -29,6 +29,7 @@ const Ar = () => {
       </a-marker>
       <a-entity camera></a-entity>
 
+
       <a-entity position="0 -1 2">
         <a-camera></a-camera>
       </a-entity>

@@ -9,7 +9,7 @@ import Ar from '../scenes/ar/';
 const Routes = () => (
   <Router>
     <Fragment>
-      <Route exact path="/" component={Main} />
+      <Route exact path="/" component={Ar} />
       <Route exact path="/riddles" component={RiddlesACT} />
       <Route exact path="/ar" component={Ar} />
     </Fragment>

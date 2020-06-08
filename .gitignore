@@ -24,9 +24,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#Designers Assets
-/src/scenes/assets
-
 #lock
 yarn.lock
 package-lock.json
